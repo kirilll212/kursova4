@@ -1,0 +1,118 @@
+@url = http://localhost:3001
+
+###
+ User register
+
+POST {{url}}/users/register
+Content-Type: application/json
+
+{
+    "firstName": "kiril",
+    "secondName": "kushnir",
+    "email": "kiril1@gmail.com",
+    "password": "1234567890K",
+    "confirmPassword": "1234567890K",
+    "type": "ZSU"
+}
+
+### User Login
+
+POST {{url}}/users/login
+Content-Type: application/json
+
+{
+    "email": "yura@gmail.com",
+    "password": "12345678901234567890"
+}
+
+### Sending token to reset password
+
+POST {{url}}/users/forgot-password
+Content-Type: application/json
+
+{
+    "email": "yura@gmail.com"
+}
+
+###
+
+POST {{url}}/users/reset-password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY5NTI3MzAwNiwiZXhwIjoxNjk1Mjc2NjA2fQ.lIJrGxRmMxobSgvwLUaXhCfWZdIHro59GxfQ3tLblUw
+
+{
+    "newPassword": "12345678901234567890",
+    "confirmNewPassword": "12345678901234567890"
+}
+
+### Show all cars
+
+GET {{url}}/cars/list
+Content-Type: application/json
+
+### Show one car by id
+GET {{url}}/cars/list/31
+Content-Type: application/json
+
+### Car adding
+
+POST {{url}}/cars/add-car
+Content-Type: application/json
+
+{
+    "mark" : "Опель",
+    "model" : "Vectra",
+    "year" : 2005,
+    "engineCapacity": 2.3,
+    "bodyType": "Седан",
+    "weight": 750.50,
+    "fuelType": "Бензин",
+    "carType": "Легковий",
+    "driveType": "Передній"
+}
+
+### Car deleting
+
+DELETE {{url}}/cars/delete-car/5
+Content-Type: application/json
+
+### Editing car information
+
+PUT {{url}}/cars/edit-car/3
+Content-Type: application/json
+
+{
+    "engineCapacity" : 2,
+    "bodyType" : "Хетчбек",
+    "weight" : 1000,
+    "driveType" : "Повний" 
+}
+
+### Show requests
+GET {{url}}/requests/all
+Content-Type: application/json
+
+### Get one request
+GET {{url}}/requests/one/1
+Content-Type: application/json
+
+### Request sending
+
+POST {{url}}/users/send-request
+Content-Type: application/json
+
+{
+    "email": "kiril1@gmail.com",
+    "title": "Important",
+    "description": "I am need new car"
+}
+
+### Request accepting
+
+POST {{url}}/users/accept-request/1
+Content-Type: application/json
+
+### Request declining
+
+POST {{url}}/users/decline-request/2
+Content-Type: application/json
