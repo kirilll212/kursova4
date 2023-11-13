@@ -1,7 +1,6 @@
 {
   "name": "course-project",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "prod": "node ./app/index.js",
@@ -23,5 +22,6 @@
     "path": "^0.12.7",
     "pg": "^8.11.3",
     "sequelize": "^6.33.0"
-  }
+  },
+  "description": ""
 }
