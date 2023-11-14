@@ -1,7 +1,6 @@
-@url = http://localhost:3001
+@url = https://api-kursova-f232527b4c0b.herokuapp.com
 
 ###User register
-
 POST {{url}}/users/register
 Content-Type: application/json
 
@@ -15,7 +14,6 @@ Content-Type: application/json
 }
 
 ### User Login
-
 POST {{url}}/users/login
 Content-Type: application/json
 
@@ -25,7 +23,6 @@ Content-Type: application/json
 }
 
 ### Sending token to reset password
-
 POST {{url}}/users/forgot-password
 Content-Type: application/json
 
@@ -33,8 +30,7 @@ Content-Type: application/json
     "email": "yura@gmail.com"
 }
 
-###
-
+### reseting password
 POST {{url}}/users/reset-password
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY5NTI3MzAwNiwiZXhwIjoxNjk1Mjc2NjA2fQ.lIJrGxRmMxobSgvwLUaXhCfWZdIHro59GxfQ3tLblUw
@@ -45,7 +41,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhd
 }
 
 ### Show all cars
-
 GET {{url}}/cars/list
 Content-Type: application/json
 
@@ -54,7 +49,6 @@ GET {{url}}/cars/list/31
 Content-Type: application/json
 
 ### Car adding
-
 POST {{url}}/cars/add-car
 Content-Type: application/json
 
@@ -71,12 +65,10 @@ Content-Type: application/json
 }
 
 ### Car deleting
-
 DELETE {{url}}/cars/delete-car/5
 Content-Type: application/json
 
 ### Editing car information
-
 PUT {{url}}/cars/edit-car/3
 Content-Type: application/json
 
@@ -96,7 +88,6 @@ GET {{url}}/requests/one/1
 Content-Type: application/json
 
 ### Request sending
-
 POST {{url}}/users/send-request
 Content-Type: application/json
 
@@ -107,11 +98,9 @@ Content-Type: application/json
 }
 
 ### Request accepting
-
 POST {{url}}/users/accept-request/1
 Content-Type: application/json
 
 ### Request declining
-
 POST {{url}}/users/decline-request/2
 Content-Type: application/json
