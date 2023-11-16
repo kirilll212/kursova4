@@ -193,11 +193,11 @@
 						<div class="col-md-12">
 							<div class="panel panel-flat">
 								<div class="panel-heading">
-									<h5 class="panel-title">Fake Circle Chart</h5>
+									<h5 class="panel-title">Circle Chart</h5>
 								</div>
 
 								<div class="panel-body text-center">
-									<canvas id="fakeChart" width="200" height="200"></canvas>
+									<canvas id="Chart" width="100" height="100"></canvas>
 								</div>
 							</div>
 						</div>
@@ -223,14 +223,14 @@
 	<!-- /page container -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script>
-		var ctx = document.getElementById("fakeChart").getContext('2d');
+		var ctx = document.getElementById("Chart").getContext('2d');
 		var fakeChart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
-				labels: ["Completed", "Remaining"],
+				labels: ["Cars", "Users", "Requests"],
 				datasets: [{
-					data: [75, 25],
-					backgroundColor: ["#4CAF50", "#f2f2f2"]
+					data: [153, 64, 27],
+					backgroundColor: ["#4CAF50", "#f2f2f2", "#f000"]
 				}]
 			},
 			options: {
