@@ -115,3 +115,13 @@ Content-Type: application/json
 
 POST {{url}}/users/decline-request/2
 Content-Type: application/json
+
+### send
+POST {{url}}/requests/send
+Content-Type: application/json
+
+{
+    "userEmail": "12",
+    "carMark": "A",
+    "carModel": "B"
+}
