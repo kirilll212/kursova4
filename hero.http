@@ -97,6 +97,16 @@ Content-Type: application/json
     "description": "I am need new car"
 }
 
+### send
+POST {{url}}/requests/send
+Content-Type: application/json
+
+{
+    "userEmail": "12",
+    "carMark": "A",
+    "carModel": "B"
+}
+
 ### Request accepting
 POST {{url}}/users/accept-request/1
 Content-Type: application/json
