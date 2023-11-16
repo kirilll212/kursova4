@@ -8,10 +8,10 @@ class RequestController {
             const dateTime = new Date();
 
             const newRequest = await Request.create({
-                userEmail,
-                carMark,
-                carModel,
-                dateTime
+                userEmail: userEmail,
+                carMark: carMark,
+                carModel: carModel,
+                dateTime: dateTime
             });
 
             res.json({ message: 'Request sent successfully', request: newRequest });
