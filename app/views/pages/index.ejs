@@ -188,6 +188,22 @@
 					</div>
 					<!-- /Statistics -->
 
+					<!-- Circle Chart -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-flat">
+								<div class="panel-heading">
+									<h5 class="panel-title">Fake Circle Chart</h5>
+								</div>
+
+								<div class="panel-body text-center">
+									<canvas id="fakeChart" width="200" height="200"></canvas>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Circle Chart -->
+
 					<!-- Footer -->
 					<div class="footer text-muted">
 						&copy; 2023. <a href="#">Admin Panel</a> by <a href="#" target="_blank">Kiril Kushnir</a>
@@ -205,6 +221,26 @@
 
 	</div>
 	<!-- /page container -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		var ctx = document.getElementById("fakeChart").getContext('2d');
+		var fakeChart = new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+				labels: ["Completed", "Remaining"],
+				datasets: [{
+					data: [75, 25],
+					backgroundColor: ["#4CAF50", "#f2f2f2"]
+				}]
+			},
+			options: {
+				cutoutPercentage: 80,
+				legend: {
+					display: false
+				}
+			}
+		});
+	</script>
 
 </body>
 
