@@ -20,9 +20,8 @@ const Request = db.define('request', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    date: {
+    dateTime: {
         type: Sequelize.STRING,
-        allowNull: false
     },
     status: {
         type: Sequelize.STRING,
