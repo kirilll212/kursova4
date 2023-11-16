@@ -6,12 +6,13 @@ class RequestController {
 
         try {
             const dateTime = new Date();
+            const newDate = dateTime.toString()
 
             const newRequest = await Request.create({
                 userEmail: userEmail,
                 carMark: carMark,
                 carModel: carModel,
-                dateTime: dateTime
+                dateTime: newDate
             });
 
             res.json({ message: 'Request sent successfully', request: newRequest });
