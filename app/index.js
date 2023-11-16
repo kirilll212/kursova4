@@ -11,7 +11,11 @@ const router = new Router()
 const path = require('path')
 const port = process.env.PORT || 3001
 
-app.set('view engine', 'ejs'); 
+const User = require('./models/user')
+const Car = require('./models/car')
+const Request = require('./models/request')
+
+app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors())
@@ -19,9 +23,29 @@ app.use(express.json())
 
 app.use('/admin', express.static(__dirname + '/public/admin'))
 
-app.get('/admin', (req, res) => {
-  res.render('pages/index');
+app.get('/admin', async (req, res) => {
+  try {
+    const usersCount = await User.count();
+    const carsCount = await Car.count();
+    const requestsCount = await Request.count();
+
+    res.render('pages/index', { usersCount, carsCount, requestsCount });
+  } catch (err) {
+    res.status(500).json({ error: 'Помилка під час отримання кількості записів' });
+  }
 })
+
+app.get('/admin/count', async (req, res) => {
+  try {
+    const usersCount = await User.count();
+    const carsCount = await Car.count();
+    const requestsCount = await Request.count();
+
+    res.json([carsCount, usersCount, requestsCount]);
+  } catch (err) {
+    res.status(500).json({ error: 'Помилка під час отримання кількості записів' });
+  }
+});
 
 app.get('/admin/users', adminController.renderUsers)
 app.get('/admin/cars', adminController.renderCars)
@@ -41,10 +65,10 @@ app.use('/cars', carRoute(router))
 app.use('/requests', requestRoute(router))
 
 sequelize.sync().then(() => {
-    console.log('Database connected');
-    app.listen(port, () => {
-      console.log(`App running on port ${port}!`);
-    });
-  }).catch(err => {
-    console.log(err);
+  console.log('Database connected');
+  app.listen(port, () => {
+    console.log(`App running on port ${port}!`);
+  });
+}).catch(err => {
+  console.log(err);
 })

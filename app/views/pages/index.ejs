@@ -165,7 +165,7 @@
 						<div class="col-lg-4">
 							<div class="panel panel-body text-center">
 								<i class="icon-users icon-3x text-teal-400"></i>
-								<h3 class="no-margin">153</h3>
+								<h3 class="no-margin" id="users"><%= usersCount %></h3>
 								<span class="text-uppercase text-size-mini">Total Users</span>
 							</div>
 						</div>
@@ -173,7 +173,7 @@
 						<div class="col-lg-4">
 							<div class="panel panel-body text-center">
 								<i class="icon-car icon-3x text-pink-400"></i>
-								<h3 class="no-margin">64</h3>
+								<h3 class="no-margin" id="cars"><%= carsCount %></h3>
 								<span class="text-uppercase text-size-mini">Active Cars</span>
 							</div>
 						</div>
@@ -181,7 +181,7 @@
 						<div class="col-lg-4">
 							<div class="panel panel-body text-center">
 								<i class="icon-list icon-3x text-indigo-400"></i>
-								<h3 class="no-margin">27</h3>
+								<h3 class="no-margin" id="requests"><%= requestsCount %></h3>
 								<span class="text-uppercase text-size-mini">Pending Requests</span>
 							</div>
 						</div>
@@ -224,12 +224,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script>
 		var ctx = document.getElementById("Chart").getContext('2d');
-		var fakeChart = new Chart(ctx, {
+		var myChart = new Chart(ctx, {
 			type: 'doughnut',
 			data: {
-				labels: ["Cars", "Users", "Requests"],
+				labels: ["Users", "Cars", "Requests"],
 				datasets: [{
-					data: [64, 153, 27],
+					data: [],
 					backgroundColor: ["#1ca6a4", "#ec4079", "#5c6bc0"]
 				}]
 			},
@@ -240,6 +240,18 @@
 				}
 			}
 		});
+		document.addEventListener('DOMContentLoaded', async function () {
+        const response = await fetch('/admin/count');
+        const data = await response.json();
+
+        myChart.data.datasets[0].data = data;
+
+        myChart.update();
+
+        document.getElementById('users').innerText = data[1];
+        document.getElementById('cars').innerText = data[0];
+        document.getElementById('requests').innerText = data[2];
+    });
 	</script>
 
 </body>

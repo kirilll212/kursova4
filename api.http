@@ -8,7 +8,7 @@ Content-Type: application/json
 {
     "firstName": "kiril",
     "secondName": "kushnir",
-    "email": "kiril1@gmail.com",
+    "email": "kiril4@gmail.com",
     "password": "1234567890K",
     "confirmPassword": "1234567890K",
     "type": "ZSU"

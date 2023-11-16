@@ -75,10 +75,10 @@ class AdminController {
             next(err);
         }
     }
-    
+
     async deleteRequest(req, res, next) {
         const requestId = req.params.id
-        
+
         try {
             const request = await Request.findByPk(requestId)
 
