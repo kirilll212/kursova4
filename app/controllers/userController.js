@@ -11,17 +11,9 @@ class userController {
         try {
             const { email, firstName, secondName, password, confirmPassword, type } = req.body
 
-            // if (!config.emailValidate(email)) {
-            //     return res.status(400).json({ message: 'Invalid email format!' });
-            // }
-
-            // if (!config.passwordValidate(password)) {
-            //     return res.status(400).json({ message: 'Invalid password format!' });
-            // }
-
-            // if (confirmPassword !== password) {
-            //     return res.status(400).json({ message: 'Passwords do not match' });
-            // }
+            if (confirmPassword !== password) {
+                return res.status(400).json({ message: 'Passwords do not match' });
+            }
 
             const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -59,7 +51,9 @@ class userController {
 
             const tocken = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '1h' })
 
-            res.status(201).json({ message: `User ${user.firstName} logged in successfully`, tocken: tocken })
+            const userType = user.type
+
+            res.status(201).json({ message: `User ${user.firstName} with type - '${user.type}' logged in successfully`, tocken: tocken })
         } catch (err) {
             res.status(400).json({ message: 'Failed to sign in! ' + err })
         }
@@ -103,10 +97,6 @@ class userController {
     async resetPassword(req, res) {
         try {
             const { newPassword, confirmNewPassword } = req.body
-
-            // if (!config.passwordValidate(newPassword)) {
-            //     res.status(400).json({ message: 'Invalid password format' })
-            // }
 
             if (confirmNewPassword !== newPassword) {
                 res.status(400).json({ message: 'Password does not match' })
