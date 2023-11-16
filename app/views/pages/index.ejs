@@ -190,14 +190,14 @@
 
 					<!-- Circle Chart -->
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-4">
 							<div class="panel panel-flat">
 								<div class="panel-heading">
 									<h5 class="panel-title">Circle Chart</h5>
 								</div>
 
 								<div class="panel-body text-center">
-									<canvas id="Chart" width="100" height="100"></canvas>
+									<canvas id="Chart" width="200" height="200"></canvas>
 								</div>
 							</div>
 						</div>
@@ -229,12 +229,12 @@
 			data: {
 				labels: ["Cars", "Users", "Requests"],
 				datasets: [{
-					data: [153, 64, 27],
-					backgroundColor: ["#4CAF50", "#f2f2f2", "#f000"]
+					data: [64, 153, 27],
+					backgroundColor: ["#1ca6a4", "#ec4079", "#5c6bc0"]
 				}]
 			},
 			options: {
-				cutoutPercentage: 80,
+				cutoutPercentage: 100,
 				legend: {
 					display: false
 				}
