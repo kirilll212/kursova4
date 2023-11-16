@@ -8,13 +8,21 @@ const Request = db.define('request', {
         allowNull: false,
         primaryKey: true,
     },
-    title: {
+    userEmail: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    description: {
+    carMark: {
         type: Sequelize.STRING,
         allowNull: true,
+    },
+    carModel: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    date: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     status: {
         type: Sequelize.STRING,
