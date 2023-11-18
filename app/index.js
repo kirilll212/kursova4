@@ -49,10 +49,10 @@ app.get('/admin/count', async (req, res) => {
 
 app.get('/admin', async (req, res) => {
   try {
-    const militaryCount = await User.count({ where: {type: 'ZSU'} })
-    const volunteerCount = await User.count({ where: {type: 'volunteer'} })
+    const militaryCount = await User.count({ where: { type: 'ZSU' } })
+    const volunteerCount = await User.count({ where: { type: 'volunteer' } })
 
-    res.render('partials/users', { militaryCount, volunteerCount})
+    res.render('partials/users', { militaryCount, volunteerCount })
   } catch (err) {
     alert('Error fetching and rendering stats: ' + err);
   }
@@ -60,11 +60,35 @@ app.get('/admin', async (req, res) => {
 
 app.get('/admin/stats', async (req, res) => {
   try {
-    const militaryCount = await User.count({ where: {type: 'ZSU'} })
-    const volunteerCount = await User.count({ where: {type: 'volunteer'} })
+    const militaryCount = await User.count({ where: { type: 'ZSU' } })
+    const volunteerCount = await User.count({ where: { type: 'volunteer' } })
 
-    res.json([ militaryCount, volunteerCount ])
+    res.json([militaryCount, volunteerCount])
   } catch (err) {
+    alert('Error fetching and rendering stats: ' + err);
+  }
+})
+
+app.get('/admin', async (req, res) => {
+  try {
+    const defaultR = await Request.count({ where: { status: 'Waiting for action' } })
+    const acceptedR = await Request.count({ where: { status: 'Accepted' } })
+    const declinedR = await Request.count({ where: { status: 'Declined' } })
+
+    res.render('partials/requests', { defaultR, acceptedR, declinedR })
+  } catch (err) {
+    alert('Error fetching and rendering stats: ' + err);
+  }
+})
+
+app.get('/admin/req-stats', async (req, res) => {
+  try {
+    const defaultR = await Request.count({ where: { status: 'Waiting for action' } })
+    const acceptedR = await Request.count({ where: { status: 'Accepted' } })
+    const declinedR = await Request.count({ where: { status: 'Declined' } })
+
+    res.json([defaultR, acceptedR, declinedR])
+  } catch (error) {
     alert('Error fetching and rendering stats: ' + err);
   }
 })
@@ -73,6 +97,7 @@ app.get('/admin/users', adminController.renderUsers)
 app.get('/admin/users', adminController.count1)
 app.get('/admin/cars', adminController.renderCars)
 app.get('/admin/requests', adminController.renderRequests)
+app.get('/admin/requests', adminController.count2)
 app.put('/admin/edit/:id', adminController.editUser)
 app.put('/admin/edit/status/:id', adminController.editUserStatus)
 app.delete('/admin/delete/:id', adminController.deleteUser)

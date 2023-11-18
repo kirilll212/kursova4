@@ -206,6 +206,47 @@
                     </div>
                     <!-- /dashboard content -->
 
+                    <!-- Statistics -->
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="panel panel-body text-center">
+								<i class="icon-list icon-3x text-teal-400"></i>
+								<span class="text-uppercase text-size-mini">Accepted</span>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="panel panel-body text-center">
+								<i class="icon-list icon-3x text-pink-400"></i>
+								<span class="text-uppercase text-size-mini">Declined</span>
+							</div>
+						</div>
+
+						<div class="col-lg-4">
+							<div class="panel panel-body text-center">
+								<i class="icon-list icon-3x text-indigo-400"></i>
+								<span class="text-uppercase text-size-mini">Waiting</span>
+							</div>
+						</div>
+					</div>
+					<!-- /Statistics -->
+
+                    <!-- Circle Chart -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">Circle Chart</h5>
+                                </div>
+
+                                <div class="panel-body text-center">
+                                    <canvas id="Chart" width="200" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Circle Chart -->
+
                     <!-- Footer -->
                     <div class="footer text-muted">
                         &copy; 2023. <a href="#">Admin Panel</a> by <a href="#" target="_blank">Kiril Kushnir</a>
@@ -225,6 +266,38 @@
     <!-- /page container -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById("Chart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Accepted", "Declined", "Waiting"],
+                datasets: [{
+                    data: [],
+                    backgroundColor: ["#1ca6a4", "#ec4079", '#5c6bc0']
+                }]
+            },
+            options: {
+                cutoutPercentage: 100,
+                legend: {
+                    display: false
+                }
+            }
+        });
+        document.addEventListener('DOMContentLoaded', async function () {
+            const response = await fetch('/admin/req-stats');
+            const data = await response.json();
+
+            myChart.data.datasets[0].data = data;
+
+            myChart.update();
+
+            document.getElementById('ac').innerText = data[1];
+            document.getElementById('dac').innerText = data[0];
+            document.getElementById('wait').innerText = data[2];
+        });
+    </script>
 
     <script>
         $(document).ready(function () {
@@ -253,6 +326,7 @@
                         if (response.status === 200) {
                             const statusCell = $(`#status_${requestId}`);
                             statusCell.text(status);
+                            location.reload()
                         } else {
                             console.error('Помилка при оновленні статусу.');
                         }

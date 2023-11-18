@@ -133,20 +133,21 @@ class AdminController {
         try {
             const militaryCount = await User.count({ where: { type: 'ZSU' } });
             const volunteerCount = await User.count({ where: { type: 'volunteer' } });
-    
+
             res.render('partials/users', { militaryCount, volunteerCount });
         } catch (err) {
             console.error('Error fetching and rendering stats:', err);
             res.status(500).send('Internal Server Error');
         }
-    }    
+    }
 
     async count2(req, res) {
         try {
-            const militaryCount = await User.count({ where: { type: 'ZSU' } })
-            const volunteerCount = await User.count({ where: { type: 'volunteer' } })
+            const defaultR = await Request.count({ where: { status: 'Waiting for action' } })
+            const acceptedR = await Request.count({ where: { status: 'Accepted' } })
+            const declinedR = await Request.count({ where: { status: 'Declined' } })
 
-            res.json([militaryCount, volunteerCount])
+            res.render('partials/requests', { defaultR, acceptedR, declinedR })
         } catch (err) {
             alert('Error fetching and rendering stats: ' + err);
         }

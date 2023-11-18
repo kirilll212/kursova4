@@ -122,6 +122,6 @@ Content-Type: application/json
 
 {
     "userEmail": "12",
-    "carMark": "A",
-    "carModel": "B"
+    "carMark": "E",
+    "carModel": "F"
 }
