@@ -8,10 +8,10 @@ Content-Type: application/json
 {
     "firstName": "kiril",
     "secondName": "kushnir",
-    "email": "kiril4@gmail.com",
+    "email": "kiril8@gmail.com",
     "password": "1234567890K",
     "confirmPassword": "1234567890K",
-    "type": "ZSU"
+    "type": "volunteer"
 }
 
 ### User Login

@@ -47,7 +47,30 @@ app.get('/admin/count', async (req, res) => {
   }
 });
 
+app.get('/admin', async (req, res) => {
+  try {
+    const militaryCount = await User.count({ where: {type: 'ZSU'} })
+    const volunteerCount = await User.count({ where: {type: 'volunteer'} })
+
+    res.render('partials/users', { militaryCount, volunteerCount})
+  } catch (err) {
+    alert('Error fetching and rendering stats: ' + err);
+  }
+})
+
+app.get('/admin/stats', async (req, res) => {
+  try {
+    const militaryCount = await User.count({ where: {type: 'ZSU'} })
+    const volunteerCount = await User.count({ where: {type: 'volunteer'} })
+
+    res.json([ militaryCount, volunteerCount ])
+  } catch (err) {
+    alert('Error fetching and rendering stats: ' + err);
+  }
+})
+
 app.get('/admin/users', adminController.renderUsers)
+app.get('/admin/users', adminController.count1)
 app.get('/admin/cars', adminController.renderCars)
 app.get('/admin/requests', adminController.renderRequests)
 app.put('/admin/edit/:id', adminController.editUser)
