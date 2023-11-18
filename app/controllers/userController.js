@@ -28,7 +28,6 @@ class userController {
             const token = jwt.sign({ userId: user.id }, config.jwtSecret, { expiresIn: '1h' })
 
             return res.status(201).json({ message: 'User registered successfully ' + user.email, token: token });
-            return user.type
         } catch (err) {
             return res.status(400).json({ message: 'Failed to register user! ' + err });
         }
@@ -55,6 +54,7 @@ class userController {
             const userType = user.type
 
             res.status(201).json({ message: `User ${user.firstName} with type - '${user.type}' logged in successfully`, tocken: tocken })
+            return res.json({message: user.type})
         } catch (err) {
             res.status(400).json({ message: 'Failed to sign in! ' + err })
         }
