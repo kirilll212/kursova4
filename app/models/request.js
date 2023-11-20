@@ -26,7 +26,7 @@ const Request = db.define('request', {
     status: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: 'Waiting for action',
+        defaultValue: 'Waiting',
     }
 });
 
