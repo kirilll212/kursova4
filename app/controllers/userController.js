@@ -198,24 +198,6 @@ class userController {
             res.status(400).json({ error: err.message })
         }
     }
-
-    async requestDecline(req, res) {
-        const id = req.params.id
-
-        try {
-            const requestInstance = await Request.findByPk(id)
-
-            if (!requestInstance) {
-                res.status(400).json({ message: `Request with id: ${id} was not found` })
-            }
-
-            await requestInstance.update({ status: 'Declined' })
-
-            res.status(201).json({ message: 'Request declined successfully' })
-        } catch (err) {
-            res.status(400).json({ error: err.message })
-        }
-    }
 }
 
 module.exports = new userController()

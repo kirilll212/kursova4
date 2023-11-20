@@ -42,10 +42,10 @@ class RequestController {
             return res.status(400).json({ message: 'Server error ' + err });
         }
     }
-    
+
     async acceptR(req, res) {
         const requestId = req.params.id
-        
+
         try {
             const request = await Request.findByPk(requestId)
 
@@ -58,6 +58,24 @@ class RequestController {
             res.json({ message: 'Accepted' })
         } catch (err) {
             return res.status(400).json({ message: 'Server error ' + err });
+        }
+    }
+
+    async declineR(req, res) {
+        const id = req.params.id
+
+        try {
+            const requestInstance = await Request.findByPk(id)
+
+            if (!requestInstance) {
+                throw new Error('Request was not found');
+            }
+
+            await requestInstance.update({ status: 'Declined' })
+
+            res.json({ message: 'Declined' })
+        } catch (err) {
+            res.status(400).json({ error: err.message })
         }
     }
 }

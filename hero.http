@@ -114,3 +114,7 @@ Content-Type: application/json
 ### Request declining
 POST {{url}}/users/decline-request/2
 Content-Type: application/json
+
+###
+PUT {{url}}/requests/accept-req/1
+Content-Type: application/json
