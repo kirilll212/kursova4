@@ -143,6 +143,18 @@ class userController {
         }
     }
 
+    async getUserById(req, res) {
+        const userId = req.params.id
+
+        try {
+            const user = await User.findByPk(userId)
+
+            res.json({ message: user})
+        } catch (err) {
+            res.status(500).json({ error: err.message })
+        }
+    }
+
     async sendRequest(req, res) {
         try {
             const { email, title, description } = req.body
