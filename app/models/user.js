@@ -35,6 +35,10 @@ const User = db.define('user', {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    imagePath: {
+        type: Sequelize.STRING,
+        allowNull: true,
     }
 })
 

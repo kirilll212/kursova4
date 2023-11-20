@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const config = require('../util/config')
+const path = require('path')
 
 class userController {
     async register(req, res) {
@@ -56,6 +57,33 @@ class userController {
             return res.status(201).json({ message: { user: user.firstName, type: user.type, id: user.id } })
         } catch (err) {
             res.status(400).json({ message: 'Failed to sign in! ' + err })
+        }
+    }
+
+    async addPhoto(req, res) {
+        try {
+            console.log(req.file);
+            const imagePath = req.file ? path.join('uploads', req.file.filename) : null;
+
+            // Отримуємо ідентифікатор користувача з заголовків запиту
+            const userId = req.headers['id'];
+
+            if (!userId) {
+                return res.status(400).json({ message: 'User ID not found in headers' });
+            }
+
+            const user = await User.findByPk(userId);
+
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            await user.update({ imagePath: imagePath });
+
+            return res.json({ message: 'Successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ message: 'Server side error ' + err });
         }
     }
 
@@ -143,14 +171,18 @@ class userController {
     }
 
     async getUserById(req, res) {
-        const userId = req.params.id
+        const userId = req.params.id;
 
         try {
-            const user = await User.findByPk(userId)
+            const user = await User.findByPk(userId);
 
-            res.json({ message: user})
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            res.json(user);
         } catch (err) {
-            res.status(500).json({ error: err.message })
+            res.status(500).json({ error: err.message });
         }
     }
 
