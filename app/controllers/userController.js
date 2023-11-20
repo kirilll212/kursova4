@@ -180,24 +180,6 @@ class userController {
             res.status(400).json({ error: err.message })
         }
     }
-
-    async requestAccept(req, res) {
-        const id = req.params.id
-
-        try {
-            const requestInstance = await Request.findByPk(id)
-
-            if (!requestInstance) {
-                res.status(400).json({ message: `Request with id: ${id} was not found` })
-            }
-
-            await requestInstance.update({ status: 'Accepted' })
-
-            res.status(201).json({ message: 'Request accepted successfully' })
-        } catch (err) {
-            res.status(400).json({ error: err.message })
-        }
-    }
 }
 
 module.exports = new userController()
