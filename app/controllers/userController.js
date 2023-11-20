@@ -53,7 +53,7 @@ class userController {
 
             const userType = user.type
 
-            res.status(201).json({ message: `User ${user.firstName} with type - '${user.type}' logged in successfully`, tocken: tocken })
+            res.status(201).json({ message: `User ${user.firstName} with type - '${user.type}' and Id - '${user.id}' logged in successfully`, tocken: tocken })
             return res.json({message: user.type})
         } catch (err) {
             res.status(400).json({ message: 'Failed to sign in! ' + err })

@@ -1,4 +1,4 @@
-@url = https://api-kursova-f232527b4c0b.herokuapp.com
+@url = https://kursova-d24696b1001b.herokuapp.com
 
 ###User register
 POST {{url}}/users/register
@@ -18,8 +18,8 @@ POST {{url}}/users/login
 Content-Type: application/json
 
 {
-    "email": "kiril1@gmail.com",
-    "password": "1234567890K"
+    "email": "r@gmail.com",
+    "password": "r"
 }
 
 ### Sending token to reset password
