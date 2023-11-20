@@ -5,6 +5,7 @@ module.exports = (router) => {
     router.get('/one/:id', requestController.getRequest)
     router.post('/send', requestController.sendRequest)
     router.put('/accept-req/:id', requestController.acceptR)
+    router.put('/decline-req/:id', requestController.declineR)
 
     return router
 }
