@@ -53,8 +53,7 @@ class userController {
 
             const userType = user.type
 
-            res.status(201).json({ message: { user: user.firstName, type: user.type, id: user.id } })
-            return res.json({message: user.type})
+            return res.status(201).json({ message: { user: user.firstName, type: user.type, id: user.id } })
         } catch (err) {
             res.status(400).json({ message: 'Failed to sign in! ' + err })
         }
