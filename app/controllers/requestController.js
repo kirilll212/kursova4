@@ -42,6 +42,24 @@ class RequestController {
             return res.status(400).json({ message: 'Server error ' + err });
         }
     }
+    
+    async acceptR(req, res) {
+        const requestId = req.params.id
+        
+        try {
+            const request = await Request.findByPk(requestId)
+
+            if (!request) {
+                throw new Error('Request was not found');
+            }
+
+            await request.update({ status: 'Accepted' })
+
+            res.json({ message: 'Accepted' })
+        } catch (err) {
+            return res.status(400).json({ message: 'Server error ' + err });
+        }
+    }
 }
 
 module.exports = new RequestController()
