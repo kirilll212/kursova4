@@ -18,7 +18,6 @@ services:
     depends_on:
       - db
     command: npm run dev
-    restart: always
   db:
     container_name: course_db
     image: postgres:15
